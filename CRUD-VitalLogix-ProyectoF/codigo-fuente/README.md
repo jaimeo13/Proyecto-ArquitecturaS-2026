@@ -9,11 +9,8 @@ Pharmacy management platform built by our team with Java, PostgreSQL, and React.
 - [Documentation Index](docs/README.md)
 
 ## Members/Contributors:
-
-- Manuel Avila Lombardi
-- José Rodolfo Hernandez Escamilla
-- Linda Natalia Loeza Suaste
-- Canche uicab perla noemi
+- Wimon Rafael Solis Chen
+- Jaime Armando Osorio Muñoz
 - Luis Gilberto Dzib Pech
 
 ## Final Document 
