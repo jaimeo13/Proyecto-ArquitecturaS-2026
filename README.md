@@ -13,7 +13,6 @@ El repositorio está organizado por entregas en carpetas públicas independiente
 | <img src="img/integrantes/luis-dzib.svg" width="96" alt="Luis Gilberto Dzib Pech" /> | **Dzib Pech, Luis Gilberto** | Desarrollador / Arquitectura (`@LuisGilDzib`) |
 | <img src="img/integrantes/wimon-solis.svg" width="96" alt="Wimon Rafael Solis Chen" /> | **Solis Chen, Wimon Rafael** | Desarrollador / Arquitectura |
 
-> **Nota para el equipo:** Sustituye los archivos `img/integrantes/jaime-osorio.svg`, `img/integrantes/luis-dzib.svg` y `img/integrantes/wimon-solis.svg` por las fotografías reales (`.jpg` o `.png`) y actualiza la extensión en la tabla superior.
 
 ---
 
