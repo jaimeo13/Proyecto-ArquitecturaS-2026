@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1478" height="939" viewBox="0 0 1478 939">
+<defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #0f172a; }
+    .sub { font-size: 11.5px; fill: #475569; }
+    .actor { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .actorSub { font-size: 10px; fill: #dbeafe; }
+    .msg { font-size: 11.5px; font-weight: 600; fill: #0f172a; }
+    .ret { font-size: 11px; fill: #475569; font-style: italic; }
+    .altlbl { font-size: 11px; font-weight: 700; fill: #991b1b; }
+  </style>
+  <marker id="syncArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9 Z" fill="#1e3a8a"/>
+  </marker>
+  <marker id="retArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.6"/>
+  </marker>
+  <marker id="errArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9 Z" fill="#dc2626"/>
+  </marker>
+</defs>
+<rect width="1478" height="939" fill="#ffffff"/>
+<rect x="12" y="12" width="1454" height="915" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="34" y="44" class="title">Diagrama de Secuencia 4 — Eliminación Masiva de Registros Seleccionados y Excepciones</text>
+<text x="34" y="64" class="sub">Borrado por lote mediante casillas de verificación (DELETE /api/products/batch) con control de integridad referencial</text>
+<rect x="34" y="463" width="1410" height="220" rx="6" fill="#ecfdf5" fill-opacity="0.55" stroke="#15803d" stroke-width="1.5" stroke-dasharray="6,3"/>
+<rect x="34" y="463" width="50" height="19" fill="#15803d"/>
+<text x="59" y="476" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">alt</text>
+<rect x="90" y="464" width="189.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.85"/>
+<text x="98" y="476" font-size="10.8" font-weight="700" fill="#15803d">[Sin dependencias de ventas]</text>
+<rect x="34" y="671" width="1410" height="168" rx="6" fill="#fef2f2" fill-opacity="0.55" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6,3"/>
+<rect x="34" y="671" width="50" height="19" fill="#dc2626"/>
+<text x="59" y="684" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">alt</text>
+<rect x="90" y="672" width="242.39999999999998" height="17" rx="3" fill="#ffffff" fill-opacity="0.85"/>
+<text x="98" y="684" font-size="10.8" font-weight="700" fill="#dc2626">[Integridad referencial MySQL (409)]</text>
+<line x1="176" y1="141" x2="176" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="83" y="95" width="186" height="46" rx="6" fill="#334155"/>
+<text x="176" y="115" text-anchor="middle" class="actor">Admin</text>
+<text x="176" y="131" text-anchor="middle" class="actorSub">Navegador Web</text>
+<line x1="401" y1="141" x2="401" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="308" y="95" width="186" height="46" rx="6" fill="#1d4ed8"/>
+<text x="401" y="115" text-anchor="middle" class="actor">ProductCrudTable</text>
+<text x="401" y="131" text-anchor="middle" class="actorSub">Modal Confirmar</text>
+<line x1="626" y1="141" x2="626" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="533" y="95" width="186" height="46" rx="6" fill="#15803d"/>
+<text x="626" y="115" text-anchor="middle" class="actor">ProductController</text>
+<text x="626" y="131" text-anchor="middle" class="actorSub">REST API</text>
+<line x1="851" y1="141" x2="851" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="758" y="95" width="186" height="46" rx="6" fill="#0f766e"/>
+<text x="851" y="115" text-anchor="middle" class="actor">ProductService</text>
+<text x="851" y="131" text-anchor="middle" class="actorSub">@Transactional</text>
+<line x1="1076" y1="141" x2="1076" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="983" y="95" width="186" height="46" rx="6" fill="#b91c1c"/>
+<text x="1076" y="115" text-anchor="middle" class="actor">GlobalExceptionHandler</text>
+<text x="1076" y="131" text-anchor="middle" class="actorSub">Control Errores</text>
+<line x1="1301" y1="141" x2="1301" y2="903" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="1208" y="95" width="186" height="46" rx="6" fill="#7c2d12"/>
+<text x="1301" y="115" text-anchor="middle" class="actor">MySQL 8.0</text>
+<text x="1301" y="131" text-anchor="middle" class="actorSub">Tabla products</text>
+<rect x="396" y="177" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="176" y1="187" x2="401" y2="187" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="108.9" y="167" width="359.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="179" text-anchor="middle" class="msg">1. Marca casillas de verificación y pulsa &#x27;Eliminar (N)&#x27;</text>
+<rect x="171" y="229" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="401" y1="239" x2="176" y2="239" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="124.4" y="219" width="328.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="231" text-anchor="middle" class="ret">2. Muestra ventana flotante de confirmación con IDs</text>
+<rect x="396" y="281" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="176" y1="291" x2="401" y2="291" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="189.5" y="271" width="198.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="283" text-anchor="middle" class="msg">3. Confirma eliminación masiva</text>
+<rect x="621" y="333" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="401" y1="343" x2="626" y2="343" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="358.7" y="323" width="309.6" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="513.5" y="335" text-anchor="middle" class="msg">4. DELETE /api/products/batch { ids: [3, 5, 8] }</text>
+<rect x="846" y="385" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="626" y1="395" x2="851" y2="395" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="673.6" y="375" width="129.8" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="738.5" y="387" text-anchor="middle" class="msg">5. deleteBatch(ids)</text>
+<rect x="1296" y="437" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="447" x2="1301" y2="447" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="924.3" y="427" width="303.40000000000003" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="1076.0" y="439" text-anchor="middle" class="msg">6. SELECT * FROM products WHERE id IN (3, 5, 8)</text>
+<rect x="846" y="489" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1301" y1="499" x2="851" y2="499" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="964.6" y="479" width="222.8" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="1076.0" y="491" text-anchor="middle" class="ret">7. Todos los registros encontrados</text>
+<rect x="1296" y="541" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="551" x2="1301" y2="551" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="930.5" y="531" width="291.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="1076.0" y="543" text-anchor="middle" class="msg">8. DELETE FROM products WHERE id IN (3, 5, 8)</text>
+<rect x="846" y="593" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1301" y1="603" x2="851" y2="603" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="973.9" y="583" width="204.20000000000002" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="1076.0" y="595" text-anchor="middle" class="ret">9. Commit transaccional exitoso</text>
+<rect x="396" y="645" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="655" x2="401" y2="655" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="452.6" y="635" width="346.8" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="626.0" y="647" text-anchor="middle" class="ret">10. HTTP 200 OK (ProductBatchDeleteResponse) + recarga</text>
+<rect x="846" y="697" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1301" y1="707" x2="851" y2="707" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#errArrow)"/>
+<rect x="927.4" y="687" width="297.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="1076.0" y="699" text-anchor="middle" class="altlbl">11. FK Constraint Violation (ventas asociadas)</text>
+<rect x="1071" y="749" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="759" x2="1076" y2="759" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#errArrow)"/>
+<rect x="833.5" y="739" width="260.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="963.5" y="751" text-anchor="middle" class="altlbl">12. throw BusinessConflictException(...)</text>
+<rect x="396" y="801" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1076" y1="811" x2="401" y2="811" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#errArrow)"/>
+<rect x="558.9" y="791" width="359.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="738.5" y="803" text-anchor="middle" class="altlbl">13. HTTP 409 Conflict (ApiError) mostrado en modal/toast</text>
+</svg>

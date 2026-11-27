@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1253" height="835" viewBox="0 0 1253 835">
+<defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #0f172a; }
+    .sub { font-size: 11.5px; fill: #475569; }
+    .actor { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .actorSub { font-size: 10px; fill: #dbeafe; }
+    .msg { font-size: 11.5px; font-weight: 600; fill: #0f172a; }
+    .ret { font-size: 11px; fill: #475569; font-style: italic; }
+    .altlbl { font-size: 11px; font-weight: 700; fill: #991b1b; }
+  </style>
+  <marker id="syncArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9 Z" fill="#1e3a8a"/>
+  </marker>
+  <marker id="retArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#475569" stroke-width="1.6"/>
+  </marker>
+  <marker id="errArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9 Z" fill="#dc2626"/>
+  </marker>
+</defs>
+<rect width="1253" height="835" fill="#ffffff"/>
+<rect x="12" y="12" width="1229" height="811" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="34" y="44" class="title">Diagrama de Secuencia 3 — Edición de Producto y Manejo de ResourceNotFoundException</text>
+<text x="34" y="64" class="sub">Flujo de actualización de un registro existente mediante ventana flotante y validación de existencia en MySQL</text>
+<rect x="34" y="463" width="1185" height="220" rx="6" fill="#eff6ff" fill-opacity="0.55" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="6,3"/>
+<rect x="34" y="463" width="50" height="19" fill="#1d4ed8"/>
+<text x="59" y="476" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">alt</text>
+<rect x="90" y="464" width="143.39999999999998" height="17" rx="3" fill="#ffffff" fill-opacity="0.85"/>
+<text x="98" y="476" font-size="10.8" font-weight="700" fill="#1d4ed8">[Producto encontrado]</text>
+<rect x="34" y="671" width="1185" height="64" rx="6" fill="#fef2f2" fill-opacity="0.55" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6,3"/>
+<rect x="34" y="671" width="50" height="19" fill="#dc2626"/>
+<text x="59" y="684" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">alt</text>
+<rect x="90" y="672" width="216.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.85"/>
+<text x="98" y="684" font-size="10.8" font-weight="700" fill="#dc2626">[ID inexistente (Excepción 404)]</text>
+<line x1="176" y1="141" x2="176" y2="799" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="83" y="95" width="186" height="46" rx="6" fill="#334155"/>
+<text x="176" y="115" text-anchor="middle" class="actor">Admin</text>
+<text x="176" y="131" text-anchor="middle" class="actorSub">Navegador Web</text>
+<line x1="401" y1="141" x2="401" y2="799" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="308" y="95" width="186" height="46" rx="6" fill="#1d4ed8"/>
+<text x="401" y="115" text-anchor="middle" class="actor">ProductCrudTable</text>
+<text x="401" y="131" text-anchor="middle" class="actorSub">Modal Edición</text>
+<line x1="626" y1="141" x2="626" y2="799" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="533" y="95" width="186" height="46" rx="6" fill="#15803d"/>
+<text x="626" y="115" text-anchor="middle" class="actor">ProductController</text>
+<text x="626" y="131" text-anchor="middle" class="actorSub">REST API</text>
+<line x1="851" y1="141" x2="851" y2="799" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="758" y="95" width="186" height="46" rx="6" fill="#0f766e"/>
+<text x="851" y="115" text-anchor="middle" class="actor">ProductService</text>
+<text x="851" y="131" text-anchor="middle" class="actorSub">ProductServicePort</text>
+<line x1="1076" y1="141" x2="1076" y2="799" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="983" y="95" width="186" height="46" rx="6" fill="#b45309"/>
+<text x="1076" y="115" text-anchor="middle" class="actor">ProductRepository</text>
+<text x="1076" y="131" text-anchor="middle" class="actorSub">JPA / MySQL</text>
+<rect x="396" y="177" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="176" y1="187" x2="401" y2="187" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="149.2" y="167" width="278.6" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="179" text-anchor="middle" class="msg">1. Clic en ícono Editar (lápiz) de una fila</text>
+<rect x="171" y="229" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="401" y1="239" x2="176" y2="239" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="108.9" y="219" width="359.2" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="231" text-anchor="middle" class="ret">2. Abre ventana flotante precargada con valores actuales</text>
+<rect x="396" y="281" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="176" y1="291" x2="401" y2="291" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="127.5" y="271" width="322.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="288.5" y="283" text-anchor="middle" class="msg">3. Modifica nombre, precio o stock y pulsa Guardar</text>
+<rect x="621" y="333" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="401" y1="343" x2="626" y2="343" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="371.1" y="323" width="284.8" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="513.5" y="335" text-anchor="middle" class="msg">4. PUT /api/products/{id} (JWT ADMIN + JSON)</text>
+<rect x="846" y="385" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="626" y1="395" x2="851" y2="395" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="664.3" y="375" width="148.4" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="738.5" y="387" text-anchor="middle" class="msg">5. update(id, request)</text>
+<rect x="1071" y="437" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="447" x2="1076" y2="447" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="911.0" y="427" width="105.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="963.5" y="439" text-anchor="middle" class="msg">6. findById(id)</text>
+<rect x="846" y="489" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1076" y1="499" x2="851" y2="499" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="861.4" y="479" width="204.20000000000002" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="963.5" y="491" text-anchor="middle" class="ret">7. Optional&lt;Product&gt; encontrado</text>
+<rect x="1071" y="541" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="551" x2="1076" y2="551" stroke="#1e3a8a" stroke-width="1.8" marker-end="url(#syncArrow)"/>
+<rect x="790.1" y="531" width="346.8" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="963.5" y="543" text-anchor="middle" class="msg">8. save(product) -&gt; UPDATE products SET ... WHERE id=?</text>
+<rect x="846" y="593" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="1076" y1="603" x2="851" y2="603" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="889.3" y="583" width="148.4" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="963.5" y="595" text-anchor="middle" class="ret">9. Product actualizado</text>
+<rect x="396" y="645" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="655" x2="401" y2="655" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#retArrow)"/>
+<rect x="449.5" y="635" width="353.0" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="626.0" y="647" text-anchor="middle" class="ret">10. HTTP 200 OK + toast de confirmación y recarga tabla</text>
+<rect x="396" y="697" width="10" height="24" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+<line x1="851" y1="707" x2="401" y2="707" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#errArrow)"/>
+<rect x="440.2" y="687" width="371.6" height="16" rx="3" fill="#ffffff" fill-opacity="0.88"/>
+<text x="626.0" y="699" text-anchor="middle" class="altlbl">11. Si ID no existe: ResourceNotFoundException -&gt; HTTP 404</text>
+</svg>

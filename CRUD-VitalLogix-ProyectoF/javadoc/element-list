@@ -1,0 +1,10 @@
+com.vitallogix.backend
+com.vitallogix.backend.config
+com.vitallogix.backend.controller
+com.vitallogix.backend.dto
+com.vitallogix.backend.exception
+com.vitallogix.backend.model
+com.vitallogix.backend.observer
+com.vitallogix.backend.repository
+com.vitallogix.backend.service
+com.vitallogix.backend.strategy
