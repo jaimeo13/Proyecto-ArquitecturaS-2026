@@ -1,0 +1,46 @@
+package com.vitallogix.backend.controller;
+
+import com.vitallogix.backend.dto.InventoryReportResponse;
+import com.vitallogix.backend.dto.SalesReportResponse;
+import com.vitallogix.backend.service.ReportServicePort;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+/**
+ * Controlador REST para emisión de reportes de ventas e inventario utilizando el puerto ReportServicePort.
+ *
+ * @author Equipo VitalLogix (Dzib Pech, Osorio Muñoz, Solis Chen)
+ * @version 2.0
+ */
+@RestController
+@RequestMapping("/api/reports")
+public class ReportController {
+    private final ReportServicePort reportService;
+
+    public ReportController(ReportServicePort reportService) {
+        this.reportService = reportService;
+    }
+
+    /**
+     * Ejecuta la operación {@code salesReport} del componente.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/sales")
+    public List<SalesReportResponse> salesReport(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        return reportService.getSalesReport(from, to);
+    }
+
+    /**
+     * Ejecuta la operación {@code inventoryReport} del componente.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/inventory")
+    public List<InventoryReportResponse> inventoryReport() {
+        return reportService.getInventoryReport();
+    }
+}

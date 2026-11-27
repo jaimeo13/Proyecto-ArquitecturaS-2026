@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="770" viewBox="0 0 1320 770">
+<defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .title { font-size: 20px; font-weight: 700; fill: #1e293b; }
+    .sub { font-size: 12px; fill: #475569; }
+    .stereo { font-size: 11px; fill: #334155; font-style: italic; }
+    .cname { font-size: 14px; font-weight: 700; fill: #0f172a; }
+    .cdesc { font-size: 11px; fill: #334155; }
+    .iface { font-size: 10.5px; font-weight: 700; fill: #1d4ed8; }
+    .art { font-size: 10.2px; fill: #475569; font-family: Menlo, monospace; }
+  </style>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#334155" stroke-width="1.5"/>
+  </marker>
+  <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+  </filter>
+</defs>
+<rect width="1320" height="770" fill="#ffffff"/>
+<rect x="16" y="16" width="1288" height="738" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="40" y="50" class="title">Diagrama de Componentes UML — Arquitectura VitalLogix CRUD (Spring Boot + MySQL + React)</text>
+<text x="40" y="70" class="sub">Representación de componentes, interfaces provistas (salida), interfaces requeridas (entrada) y artefactos de despliegue</text>
+<rect x="36" y="92" width="222" height="24" rx="4" fill="#1d4ed8"/>
+<text x="46" y="108" font-size="11" font-weight="700" fill="#ffffff">Capa Presentación (Frontend)</text>
+<rect x="36" y="112" width="300" height="615" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<rect x="396" y="92" width="299" height="24" rx="4" fill="#15803d"/>
+<text x="406" y="108" font-size="11" font-weight="700" fill="#ffffff">Capa Aplicación y Negocio (Spring Boot)</text>
+<rect x="396" y="112" width="560" height="615" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+<rect x="1004" y="92" width="195" height="24" rx="4" fill="#b45309"/>
+<text x="1014" y="108" font-size="11" font-weight="700" fill="#ffffff">Capa Datos y Despliegue</text>
+<rect x="1004" y="112" width="280" height="615" rx="8" fill="#fefce8" stroke="#b45309" stroke-width="1.5"/>
+<g filter="url(#shadow)">
+<rect x="56" y="146" width="260" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.8"/>
+<rect x="290" y="156" width="16" height="20" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="159" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="168" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="70" y="167" class="stereo">«component»</text>
+<text x="70" y="186" class="cname">UI Admin: Modificar en Masa</text>
+<line x1="68" y1="194" x2="304" y2="194" stroke="#e2e8f0" stroke-width="1"/>
+<text x="70" y="210" class="cdesc">ProductCrudTable.jsx (solo ADMIN)</text>
+<text x="70" y="226" class="cdesc">Tabla MySQL + Checkboxes</text>
+<text x="70" y="242" class="cdesc">Alta, Edición/Borrado en masa</text>
+<text x="70" y="258" class="art">Artefacto: React 19 + Vite + Tailwind</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="56" y="345" width="260" height="145" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.8"/>
+<rect x="290" y="355" width="16" height="20" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="358" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="367" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="70" y="366" class="stereo">«component»</text>
+<text x="70" y="385" class="cname">Cliente HTTP / Sesiones</text>
+<line x1="68" y1="393" x2="304" y2="393" stroke="#e2e8f0" stroke-width="1"/>
+<text x="70" y="409" class="cdesc">services/api.js + RootApp.jsx</text>
+<text x="70" y="425" class="cdesc">AuthModal.jsx (JWT Bearer)</text>
+<text x="70" y="441" class="cdesc">Interceptores Axios REST</text>
+<text x="70" y="457" class="art">Artefacto: axios 1.14 + localStorage</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="56" y="535" width="260" height="145" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.8"/>
+<rect x="290" y="545" width="16" height="20" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="548" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<rect x="285" y="557" width="9" height="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2"/>
+<text x="70" y="556" class="stereo">«component»</text>
+<text x="70" y="575" class="cname">Módulos Farmacia Extra</text>
+<line x1="68" y1="583" x2="304" y2="583" stroke="#e2e8f0" stroke-width="1"/>
+<text x="70" y="599" class="cdesc">Ventas / Carrito / Facturación PDF</text>
+<text x="70" y="615" class="cdesc">CustomerManagementPanel.jsx</text>
+<text x="70" y="631" class="cdesc">Category &amp; Campaign Panels</text>
+<text x="70" y="647" class="art">Artefacto: jsPDF 4.2</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="418" y="146" width="242" height="150" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.8"/>
+<rect x="634" y="156" width="16" height="20" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="159" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="168" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<text x="432" y="167" class="stereo">«component»</text>
+<text x="432" y="186" class="cname">API REST Productos</text>
+<line x1="430" y1="194" x2="648" y2="194" stroke="#e2e8f0" stroke-width="1"/>
+<text x="432" y="210" class="cdesc">ProductController</text>
+<text x="432" y="226" class="cdesc">GET/POST/PUT/PATCH/DELETE</text>
+<text x="432" y="242" class="cdesc">PATCH &amp; DELETE /products/batch</text>
+<text x="432" y="258" class="art">Artefacto: spring-boot-webmvc</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="690" y="146" width="244" height="150" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.8"/>
+<rect x="908" y="156" width="16" height="20" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="903" y="159" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="903" y="168" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<text x="704" y="167" class="stereo">«component»</text>
+<text x="704" y="186" class="cname">Seguridad &amp; Auth JWT</text>
+<line x1="702" y1="194" x2="922" y2="194" stroke="#e2e8f0" stroke-width="1"/>
+<text x="704" y="210" class="cdesc">AuthController + SecurityConfig</text>
+<text x="704" y="226" class="cdesc">JwtService (HS256) + BCrypt</text>
+<text x="704" y="242" class="cdesc">Control de roles ADMIN / USER</text>
+<text x="704" y="258" class="art">Artefacto: spring-security + jjwt</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="418" y="345" width="242" height="155" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.8"/>
+<rect x="634" y="355" width="16" height="20" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="358" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="367" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<text x="432" y="366" class="stereo">«component»</text>
+<text x="432" y="385" class="cname">Servicio CRUD Productos</text>
+<line x1="430" y1="393" x2="648" y2="393" stroke="#e2e8f0" stroke-width="1"/>
+<text x="432" y="409" class="cdesc">ProductService (implementa</text>
+<text x="432" y="425" class="cdesc">ProductServicePort - DIP)</text>
+<text x="432" y="441" class="cdesc">SKU único + Strategy Promociones</text>
+<text x="432" y="457" class="cdesc">Transacciones @Transactional</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="690" y="345" width="244" height="155" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.8"/>
+<rect x="908" y="355" width="16" height="20" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
+<rect x="903" y="358" width="9" height="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
+<rect x="903" y="367" width="9" height="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.2"/>
+<text x="704" y="366" class="stereo">«component»</text>
+<text x="704" y="385" class="cname">Manejo Global Excepciones</text>
+<line x1="702" y1="393" x2="922" y2="393" stroke="#e2e8f0" stroke-width="1"/>
+<text x="704" y="409" class="cdesc">GlobalExceptionHandler</text>
+<text x="704" y="425" class="cdesc">ResourceNotFoundException (404)</text>
+<text x="704" y="441" class="cdesc">Duplicate / BusinessConflict (409)</text>
+<text x="704" y="457" class="cdesc">InvalidOperation / ApiError (400)</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="418" y="545" width="242" height="145" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.8"/>
+<rect x="634" y="555" width="16" height="20" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="558" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="629" y="567" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<text x="432" y="566" class="stereo">«component»</text>
+<text x="432" y="585" class="cname">Persistencia JPA</text>
+<line x1="430" y1="593" x2="648" y2="593" stroke="#e2e8f0" stroke-width="1"/>
+<text x="432" y="609" class="cdesc">ProductRepository + UserRepository</text>
+<text x="432" y="625" class="cdesc">SaleRepository + CategoryRepository</text>
+<text x="432" y="641" class="cdesc">Consultas JPQL paginadas</text>
+<text x="432" y="657" class="art">Artefacto: spring-boot-data-jpa</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="690" y="545" width="244" height="145" rx="6" fill="#ffffff" stroke="#15803d" stroke-width="1.8"/>
+<rect x="908" y="555" width="16" height="20" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="903" y="558" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<rect x="903" y="567" width="9" height="4" fill="#ffffff" stroke="#15803d" stroke-width="1.2"/>
+<text x="704" y="566" class="stereo">«component»</text>
+<text x="704" y="585" class="cname">Bootstrap &amp; Ventas</text>
+<line x1="702" y1="593" x2="922" y2="593" stroke="#e2e8f0" stroke-width="1"/>
+<text x="704" y="609" class="cdesc">DataInitializer (Seed 12 productos)</text>
+<text x="704" y="625" class="cdesc">SaleService + SaleEventNotifier</text>
+<text x="704" y="641" class="cdesc">LoyaltyObserver + ReportService</text>
+<text x="704" y="657" class="art">Artefacto: Hibernate ORM</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="1024" y="185" width="240" height="195" rx="6" fill="#fffbeb" stroke="#b45309" stroke-width="1.8"/>
+<rect x="1238" y="195" width="16" height="20" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<rect x="1233" y="198" width="9" height="4" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<rect x="1233" y="207" width="9" height="4" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<text x="1038" y="206" class="stereo">«database»</text>
+<text x="1038" y="225" class="cname">MySQL 8.0 Server</text>
+<line x1="1036" y1="233" x2="1252" y2="233" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1038" y="249" class="cdesc">Esquema: vitallogix</text>
+<text x="1038" y="265" class="cdesc">Tablas: products, users,</text>
+<text x="1038" y="281" class="cdesc">categories, customers,</text>
+<text x="1038" y="297" class="cdesc">sales, sale_items, campaigns</text>
+<text x="1038" y="313" class="cdesc">Puerto TCP: 3306</text>
+<text x="1038" y="329" class="art">Artefacto: mysql-connector-j</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="1024" y="445" width="240" height="175" rx="6" fill="#ffffff" stroke="#b45309" stroke-width="1.8"/>
+<rect x="1238" y="455" width="16" height="20" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<rect x="1233" y="458" width="9" height="4" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<rect x="1233" y="467" width="9" height="4" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+<text x="1038" y="466" class="stereo">«artifact»</text>
+<text x="1038" y="485" class="cname">Contenedores Docker</text>
+<line x1="1036" y1="493" x2="1252" y2="493" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1038" y="509" class="cdesc">docker-compose.yml</text>
+<text x="1038" y="525" class="cdesc">Dockerfile (Temurin 21 Alpine)</text>
+<text x="1038" y="541" class="cdesc">application.properties / .env</text>
+<text x="1038" y="557" class="cdesc">Volumen: vitallogix_mysql_data</text>
+<text x="1038" y="573" class="cdesc">Healthcheck mysqladmin ping</text>
+</g>
+<line x1="186" y1="296" x2="186" y2="345" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="143.25" y="313" width="85.5" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="186" y="325" text-anchor="middle" class="iface">IHttpClient</text>
+<line x1="186" y1="535" x2="186" y2="490" stroke="#334155" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="140.0" y="505" width="92.0" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="186" y="517" text-anchor="middle" class="iface">IAuthSession</text>
+<line x1="316" y1="220" x2="361.0" y2="220.0" stroke="#334155" stroke-width="1.7"/>
+<circle cx="367.0" cy="220.0" r="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<line x1="373.0" y1="220.0" x2="418" y2="220" stroke="#334155" stroke-width="1.7"/>
+<rect x="317.75" y="193" width="98.5" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="367" y="205" text-anchor="middle" class="iface">IRestProducts</text>
+<path d="M 316 418 L 366 418 L 366 126 L 812 126 L 812 146" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="645" y="117" width="114" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="702" y="129" text-anchor="middle" class="iface">IAuthJWT (HTTP)</text>
+<line x1="539" y1="296" x2="539" y2="314" stroke="#334155" stroke-width="1.7"/>
+<circle cx="539" cy="320" r="6" fill="#ffffff" stroke="#15803d" stroke-width="2"/>
+<line x1="539" y1="326" x2="539" y2="345" stroke="#334155" stroke-width="1.7"/>
+<rect x="552" y="311" width="114" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="609" y="323" text-anchor="middle" class="iface">ProductServicePort</text>
+<line x1="539" y1="500" x2="539" y2="545" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="493.0" y="514" width="92.0" height="16" rx="3" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="539" y="526" text-anchor="middle" class="iface">IProductRepo</text>
+<line x1="660" y1="422" x2="690" y2="422" stroke="#334155" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<line x1="660" y1="220" x2="690" y2="220" stroke="#334155" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<path d="M 934 220 L 948 220 L 948 520 L 635 520 L 635 545" fill="none" stroke="#334155" stroke-width="1.4" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+<line x1="690" y1="618" x2="660" y2="618" stroke="#334155" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<path d="M 660 665 L 980 665 L 980 282 L 1024 282" fill="none" stroke="#b45309" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="935" y="256" width="90" height="18" rx="3" fill="#ffffff" stroke="#fde68a" stroke-width="0.9"/>
+<text x="980" y="269" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b45309">JDBC MySQL</text>
+<line x1="1144" y1="445" x2="1144" y2="380" stroke="#b45309" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+<text x="1186" y="416" text-anchor="middle" font-size="10.5" fill="#92400e">«deploys»</text>
+</svg>

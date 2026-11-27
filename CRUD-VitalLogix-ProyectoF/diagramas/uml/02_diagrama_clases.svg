@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1580" height="1080" viewBox="0 0 1580 1080">
+<defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .title { font-size: 21px; font-weight: 700; fill: #0f172a; }
+    .sub { font-size: 12px; fill: #475569; }
+    .stereo { font-size: 10.5px; font-style: italic; fill: #ffffff; }
+    .clstitle { font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .mem { font-size: 9.4px; font-family: Menlo, Consolas, monospace; fill: #1e293b; }
+    .rel { font-size: 10.5px; font-weight: 600; fill: #334155; }
+  </style>
+  <marker id="openArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#334155" stroke-width="1.6"/>
+  </marker>
+  <marker id="triArrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11 Z" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+  </marker>
+</defs>
+<rect width="1580" height="1080" fill="#ffffff"/>
+<rect x="14" y="14" width="1552" height="1052" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="36" y="48" class="title">Diagrama de Clases UML — Módulo CRUD de Productos, Seguridad y Excepciones (VitalLogix)</text>
+<text x="36" y="68" class="sub">Arquitectura en capas con Spring Boot, JPA/MySQL, Principio DIP (ProductServicePort), Patrón Strategy y Manejo Global de Excepciones</text>
+<rect x="36" y="92" width="390" height="174.0" rx="5" fill="#ffffff" stroke="#1e40af" stroke-width="1.6"/>
+<rect x="36" y="92" width="390" height="38" rx="5" fill="#1e40af"/>
+<rect x="36" y="125" width="390" height="5" fill="#1e40af"/>
+<text x="231.0" y="106" text-anchor="middle" class="stereo">«RestController»</text>
+<text x="231.0" y="122" text-anchor="middle" class="clstitle">ProductController</text>
+<text x="44" y="144" class="mem">- productService : ProductServicePort</text>
+<line x1="36" y1="154.5" x2="426" y2="154.5" stroke="#1e40af" stroke-width="1"/>
+<text x="44" y="168.5" class="mem">+ findAll(q, cat, pageable) : Page&lt;ProductResponse&gt;</text>
+<text x="44" y="183.0" class="mem">+ findById(id : Long) : ProductResponse</text>
+<text x="44" y="197.5" class="mem">+ create(req : ProductRequest) : ProductResponse</text>
+<text x="44" y="212.0" class="mem">+ update(id : Long, req : ProductRequest) : ProductResponse</text>
+<text x="44" y="226.5" class="mem">+ updateBatch(req : ProductBatchUpdateRequest) : BatchResp</text>
+<text x="44" y="241.0" class="mem">+ delete(id : Long) : void</text>
+<text x="44" y="255.5" class="mem">+ deleteBatch(req : ProductBatchDeleteRequest) : BatchResp</text>
+<rect x="465" y="92" width="355" height="130.5" rx="5" fill="#ffffff" stroke="#0f766e" stroke-width="1.6"/>
+<rect x="465" y="92" width="355" height="38" rx="5" fill="#0f766e"/>
+<rect x="465" y="125" width="355" height="5" fill="#0f766e"/>
+<text x="642.5" y="106" text-anchor="middle" class="stereo">«RestController»</text>
+<text x="642.5" y="122" text-anchor="middle" class="clstitle">AuthController</text>
+<text x="473" y="144" class="mem">- userRepository : UserRepository</text>
+<text x="473" y="158.5" class="mem">- jwtService : JwtService</text>
+<text x="473" y="173.0" class="mem">- passwordEncoder : PasswordEncoder</text>
+<line x1="465" y1="183.5" x2="820" y2="183.5" stroke="#0f766e" stroke-width="1"/>
+<text x="473" y="197.5" class="mem">+ register(data : Map&lt;String,String&gt;) : ResponseEntity&lt;?&gt;</text>
+<text x="473" y="212.0" class="mem">+ login(data : Map&lt;String,String&gt;) : ResponseEntity&lt;?&gt;</text>
+<rect x="860" y="92" width="315" height="145.0" rx="5" fill="#ffffff" stroke="#0f766e" stroke-width="1.6"/>
+<rect x="860" y="92" width="315" height="38" rx="5" fill="#0f766e"/>
+<rect x="860" y="125" width="315" height="5" fill="#0f766e"/>
+<text x="1017.5" y="106" text-anchor="middle" class="stereo">«Service»</text>
+<text x="1017.5" y="122" text-anchor="middle" class="clstitle">JwtService</text>
+<text x="868" y="144" class="mem">- SECRET_KEY : String</text>
+<text x="868" y="158.5" class="mem">- userDetailsService : UserDetailsService</text>
+<line x1="860" y1="169.0" x2="1175" y2="169.0" stroke="#0f766e" stroke-width="1"/>
+<text x="868" y="183.0" class="mem">+ generateToken(user : UserDetails) : String</text>
+<text x="868" y="197.5" class="mem">+ extractUsername(token : String) : String</text>
+<text x="868" y="212.0" class="mem">+ validateToken(token, user) : boolean</text>
+<text x="868" y="226.5" class="mem"># doFilterInternal(req, res, chain) : void</text>
+<rect x="1215" y="92" width="325" height="159.5" rx="5" fill="#ffffff" stroke="#b91c1c" stroke-width="1.6"/>
+<rect x="1215" y="92" width="325" height="38" rx="5" fill="#b91c1c"/>
+<rect x="1215" y="125" width="325" height="5" fill="#b91c1c"/>
+<text x="1377.5" y="106" text-anchor="middle" class="stereo">«RestControllerAdvice»</text>
+<text x="1377.5" y="122" text-anchor="middle" class="clstitle">GlobalExceptionHandler</text>
+<text x="1223" y="144" class="mem">(intercepta excepciones REST globalmente)</text>
+<line x1="1215" y1="154.5" x2="1540" y2="154.5" stroke="#b91c1c" stroke-width="1"/>
+<text x="1223" y="168.5" class="mem">+ handleNotFound(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<text x="1223" y="183.0" class="mem">+ handleDuplicate(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<text x="1223" y="197.5" class="mem">+ handleBusinessConflict(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<text x="1223" y="212.0" class="mem">+ handleInvalidOperation(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<text x="1223" y="226.5" class="mem">+ handleValidation(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<text x="1223" y="241.0" class="mem">+ handleDataIntegrity(ex) : ResponseEntity&lt;ApiError&gt;</text>
+<rect x="36" y="320" width="390" height="174.0" rx="5" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<rect x="36" y="320" width="390" height="38" rx="5" fill="#15803d"/>
+<rect x="36" y="353" width="390" height="5" fill="#15803d"/>
+<text x="231.0" y="334" text-anchor="middle" class="stereo">«interface»</text>
+<text x="231.0" y="350" text-anchor="middle" class="clstitle">ProductServicePort</text>
+<text x="44" y="372" class="mem">(interfaz de salida del componente CRUD)</text>
+<line x1="36" y1="382.5" x2="426" y2="382.5" stroke="#15803d" stroke-width="1"/>
+<text x="44" y="396.5" class="mem">+ findAll(q, cat, pageable) : Page&lt;ProductResponse&gt;</text>
+<text x="44" y="411.0" class="mem">+ findById(id : Long) : ProductResponse</text>
+<text x="44" y="425.5" class="mem">+ create(req : ProductRequest) : ProductResponse</text>
+<text x="44" y="440.0" class="mem">+ update(id : Long, req : ProductRequest) : ProductResponse</text>
+<text x="44" y="454.5" class="mem">+ updateBatch(req : BatchUpdateReq) : BatchUpdateResp</text>
+<text x="44" y="469.0" class="mem">+ delete(id : Long) : void</text>
+<text x="44" y="483.5" class="mem">+ deleteBatch(ids : List&lt;Long&gt;) : BatchDeleteResponse</text>
+<rect x="470" y="315" width="375" height="188.5" rx="5" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<rect x="470" y="315" width="375" height="38" rx="5" fill="#15803d"/>
+<rect x="470" y="348" width="375" height="5" fill="#15803d"/>
+<text x="657.5" y="329" text-anchor="middle" class="stereo">«Service»</text>
+<text x="657.5" y="345" text-anchor="middle" class="clstitle">ProductService</text>
+<text x="478" y="367" class="mem">- repository : ProductRepository</text>
+<line x1="470" y1="377.5" x2="845" y2="377.5" stroke="#15803d" stroke-width="1"/>
+<text x="478" y="391.5" class="mem">+ findAll(q, cat, pageable) : Page&lt;ProductResponse&gt;</text>
+<text x="478" y="406.0" class="mem">+ findById(id : Long) : ProductResponse</text>
+<text x="478" y="420.5" class="mem">+ create(req : ProductRequest) : ProductResponse</text>
+<text x="478" y="435.0" class="mem">+ update(id : Long, req : ProductRequest) : ProductResponse</text>
+<text x="478" y="449.5" class="mem">+ updateBatch(req : BatchUpdateReq) : BatchUpdateResp</text>
+<text x="478" y="464.0" class="mem">+ delete(id : Long) : void</text>
+<text x="478" y="478.5" class="mem">+ deleteBatch(ids : List&lt;Long&gt;) : BatchDeleteResponse</text>
+<text x="478" y="493.0" class="mem">- applyPromotionFields(p, req) : void</text>
+<rect x="880" y="315" width="305" height="101.5" rx="5" fill="#ffffff" stroke="#6d28d9" stroke-width="1.6"/>
+<rect x="880" y="315" width="305" height="38" rx="5" fill="#6d28d9"/>
+<rect x="880" y="348" width="305" height="5" fill="#6d28d9"/>
+<text x="1032.5" y="329" text-anchor="middle" class="stereo">«interface»</text>
+<text x="1032.5" y="345" text-anchor="middle" class="clstitle">PromotionStrategy</text>
+<text x="888" y="367" class="mem">(Patrón Strategy)</text>
+<line x1="880" y1="377.5" x2="1185" y2="377.5" stroke="#6d28d9" stroke-width="1"/>
+<text x="888" y="391.5" class="mem">+ validate(buy, pay, pct) : void</text>
+<text x="888" y="406.0" class="mem">+ calculateLineNet(price, qty, ...) : BigDecimal</text>
+<rect x="880" y="445" width="305" height="101.5" rx="5" fill="#ffffff" stroke="#6d28d9" stroke-width="1.6"/>
+<rect x="880" y="445" width="305" height="38" rx="5" fill="#6d28d9"/>
+<rect x="880" y="478" width="305" height="5" fill="#6d28d9"/>
+<text x="1032.5" y="459" text-anchor="middle" class="stereo">«Singleton»</text>
+<text x="1032.5" y="475" text-anchor="middle" class="clstitle">PromotionStrategyFactory</text>
+<text x="888" y="497" class="mem">- instance : PromotionStrategyFactory</text>
+<line x1="880" y1="507.5" x2="1185" y2="507.5" stroke="#6d28d9" stroke-width="1"/>
+<text x="888" y="521.5" class="mem">+ getInstance() : PromotionStrategyFactory</text>
+<text x="888" y="536.0" class="mem">+ getStrategy(type : String) : PromotionStrategy</text>
+<rect x="1215" y="315" width="325" height="174.0" rx="5" fill="#ffffff" stroke="#b91c1c" stroke-width="1.6"/>
+<rect x="1215" y="315" width="325" height="38" rx="5" fill="#b91c1c"/>
+<rect x="1215" y="348" width="325" height="5" fill="#b91c1c"/>
+<text x="1377.5" y="329" text-anchor="middle" class="stereo">«Exception / DTO»</text>
+<text x="1377.5" y="345" text-anchor="middle" class="clstitle">ApiError &amp; Excepciones</text>
+<text x="1223" y="367" class="mem">- timestamp : LocalDateTime</text>
+<text x="1223" y="381.5" class="mem">- status : int</text>
+<text x="1223" y="396.0" class="mem">- error : String</text>
+<text x="1223" y="410.5" class="mem">- messages : List&lt;String&gt;</text>
+<line x1="1215" y1="421.0" x2="1540" y2="421.0" stroke="#b91c1c" stroke-width="1"/>
+<text x="1223" y="435.0" class="mem">+ ResourceNotFoundException(msg : String)</text>
+<text x="1223" y="449.5" class="mem">+ DuplicateResourceException(msg : String)</text>
+<text x="1223" y="464.0" class="mem">+ BusinessConflictException(msg : String)</text>
+<text x="1223" y="478.5" class="mem">+ InvalidOperationException(msg : String)</text>
+<rect x="36" y="595" width="400" height="130.5" rx="5" fill="#ffffff" stroke="#b45309" stroke-width="1.6"/>
+<rect x="36" y="595" width="400" height="38" rx="5" fill="#b45309"/>
+<rect x="36" y="628" width="400" height="5" fill="#b45309"/>
+<text x="236.0" y="609" text-anchor="middle" class="stereo">«interface / JpaRepository»</text>
+<text x="236.0" y="625" text-anchor="middle" class="clstitle">ProductRepository</text>
+<text x="44" y="647" class="mem">(extiende JpaRepository&lt;Product, Long&gt;)</text>
+<line x1="36" y1="657.5" x2="436" y2="657.5" stroke="#b45309" stroke-width="1"/>
+<text x="44" y="671.5" class="mem">+ findByNameContainingIgnoreCase(name) : List&lt;Product&gt;</text>
+<text x="44" y="686.0" class="mem">+ findByCodeIgnoreCase(code) : Optional&lt;Product&gt;</text>
+<text x="44" y="700.5" class="mem">+ existsByCodeIgnoreCase(code) : boolean</text>
+<text x="44" y="715.0" class="mem">+ searchPaginated(q, cat, pageable) : Page&lt;Product&gt;</text>
+<rect x="480" y="595" width="365" height="275.5" rx="5" fill="#ffffff" stroke="#0369a1" stroke-width="1.6"/>
+<rect x="480" y="595" width="365" height="38" rx="5" fill="#0369a1"/>
+<rect x="480" y="628" width="365" height="5" fill="#0369a1"/>
+<text x="662.5" y="609" text-anchor="middle" class="stereo">«Entity @Table(products)»</text>
+<text x="662.5" y="625" text-anchor="middle" class="clstitle">Product</text>
+<text x="488" y="647" class="mem">- id : Long  &lt;&lt;PK, AUTO_INCREMENT&gt;&gt;</text>
+<text x="488" y="661.5" class="mem">- name : String  (NOT NULL, 150)</text>
+<text x="488" y="676.0" class="mem">- code : String  (UNIQUE, 60)</text>
+<text x="488" y="690.5" class="mem">- description : String  (500)</text>
+<text x="488" y="705.0" class="mem">- imageUrl : String  (LONGTEXT)</text>
+<text x="488" y="719.5" class="mem">- category : String  (100)</text>
+<text x="488" y="734.0" class="mem">- price : BigDecimal  (NOT NULL, &gt;=0)</text>
+<text x="488" y="748.5" class="mem">- stock : Integer  (NOT NULL, &gt;=0)</text>
+<text x="488" y="763.0" class="mem">- requiresPrescription : boolean = false</text>
+<text x="488" y="777.5" class="mem">- visibleInSuggestions : boolean = true</text>
+<text x="488" y="792.0" class="mem">- promotionType : String</text>
+<text x="488" y="806.5" class="mem">- createdAt : LocalDateTime</text>
+<text x="488" y="821.0" class="mem">- expirationDate : LocalDateTime</text>
+<line x1="480" y1="831.5" x2="845" y2="831.5" stroke="#0369a1" stroke-width="1"/>
+<text x="488" y="845.5" class="mem">+ prePersist() : void</text>
+<text x="488" y="860.0" class="mem">+ getters() / setters()</text>
+<rect x="890" y="595" width="300" height="188.5" rx="5" fill="#ffffff" stroke="#0369a1" stroke-width="1.6"/>
+<rect x="890" y="595" width="300" height="38" rx="5" fill="#0369a1"/>
+<rect x="890" y="628" width="300" height="5" fill="#0369a1"/>
+<text x="1040.0" y="609" text-anchor="middle" class="stereo">«Entity @Table(users)»</text>
+<text x="1040.0" y="625" text-anchor="middle" class="clstitle">User</text>
+<text x="898" y="647" class="mem">- id : Long  &lt;&lt;PK&gt;&gt;</text>
+<text x="898" y="661.5" class="mem">- username : String  (UNIQUE)</text>
+<text x="898" y="676.0" class="mem">- password : String  (BCrypt)</text>
+<text x="898" y="690.5" class="mem">- roles : Set&lt;Role&gt;</text>
+<text x="898" y="705.0" class="mem">- clienteAmigoNumber : String</text>
+<text x="898" y="719.5" class="mem">- friend : Boolean = false</text>
+<text x="898" y="734.0" class="mem">- purchasesSinceCoupon : Integer = 0</text>
+<line x1="890" y1="744.5" x2="1190" y2="744.5" stroke="#0369a1" stroke-width="1"/>
+<text x="898" y="758.5" class="mem">+ getRoles() : Set&lt;Role&gt;</text>
+<text x="898" y="773.0" class="mem">+ isFriend() : boolean</text>
+<rect x="1225" y="595" width="315" height="174.0" rx="5" fill="#ffffff" stroke="#0369a1" stroke-width="1.6"/>
+<rect x="1225" y="595" width="315" height="38" rx="5" fill="#0369a1"/>
+<rect x="1225" y="628" width="315" height="5" fill="#0369a1"/>
+<text x="1382.5" y="609" text-anchor="middle" class="stereo">«Entity @Table(sales)»</text>
+<text x="1382.5" y="625" text-anchor="middle" class="clstitle">Sale &amp; SaleItem</text>
+<text x="1233" y="647" class="mem">- id : Long  &lt;&lt;PK&gt;&gt;</text>
+<text x="1233" y="661.5" class="mem">- saleDate : LocalDateTime</text>
+<text x="1233" y="676.0" class="mem">- totalAmount : BigDecimal</text>
+<text x="1233" y="690.5" class="mem">- discountAmount : BigDecimal</text>
+<text x="1233" y="705.0" class="mem">- items : List&lt;SaleItem&gt;</text>
+<text x="1233" y="719.5" class="mem">- customer : Customer</text>
+<line x1="1225" y1="730.0" x2="1540" y2="730.0" stroke="#0369a1" stroke-width="1"/>
+<text x="1233" y="744.0" class="mem">+ addItem(item : SaleItem) : void</text>
+<text x="1233" y="758.5" class="mem">+ onCreate() : void</text>
+<rect x="890" y="865" width="300" height="116.0" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+<rect x="890" y="865" width="300" height="38" rx="5" fill="#475569"/>
+<rect x="890" y="898" width="300" height="5" fill="#475569"/>
+<text x="1040.0" y="879" text-anchor="middle" class="stereo">«Configuration»</text>
+<text x="1040.0" y="895" text-anchor="middle" class="clstitle">DataInitializer</text>
+<text x="898" y="917" class="mem">- bootstrapAdminUsername : String</text>
+<text x="898" y="931.5" class="mem">- bootstrapSeedProductsEnabled : boolean</text>
+<line x1="890" y1="942.0" x2="1190" y2="942.0" stroke="#475569" stroke-width="1"/>
+<text x="898" y="956.0" class="mem">+ initData(uRepo, cRepo, pRepo, enc) : Runner</text>
+<text x="898" y="970.5" class="mem">- seedDefaultProducts(pRepo) : void</text>
+<rect x="1225" y="865" width="315" height="145.0" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+<rect x="1225" y="865" width="315" height="38" rx="5" fill="#475569"/>
+<rect x="1225" y="898" width="315" height="5" fill="#475569"/>
+<text x="1382.5" y="879" text-anchor="middle" class="stereo">«record / DTO»</text>
+<text x="1382.5" y="895" text-anchor="middle" class="clstitle">ProductRequest &amp; Response</text>
+<text x="1233" y="917" class="mem">+ name : String  (@NotBlank)</text>
+<text x="1233" y="931.5" class="mem">+ price : BigDecimal (@DecimalMin 0)</text>
+<text x="1233" y="946.0" class="mem">+ stock : Integer (@Min 0)</text>
+<text x="1233" y="960.5" class="mem">+ ids : List&lt;Long&gt; (BatchDelete)</text>
+<line x1="1225" y1="971.0" x2="1540" y2="971.0" stroke="#475569" stroke-width="1"/>
+<text x="1233" y="985.0" class="mem">+ ProductRequest(...)</text>
+<text x="1233" y="999.5" class="mem">+ ProductResponse(...)</text>
+<line x1="230" y1="269" x2="230" y2="320" stroke="#334155" stroke-width="1.6" marker-end="url(#openArrow)"/>
+<text x="240" y="299" class="rel">usa (DIP) 1</text>
+<line x1="470" y1="415" x2="426" y2="415" stroke="#15803d" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#triArrow)"/>
+<text x="448" y="405" text-anchor="middle" class="rel">«impl»</text>
+<path d="M 565 509 L 565 556 L 236 556 L 236 595" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#openArrow)"/>
+<text x="400" y="548" text-anchor="middle" class="rel">inyecta (1)</text>
+<line x1="845" y1="485" x2="880" y2="485" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#openArrow)"/>
+<line x1="1032" y1="445" x2="1032" y2="412" stroke="#6d28d9" stroke-width="1.5" marker-end="url(#openArrow)"/>
+<line x1="436" y1="668" x2="480" y2="668" stroke="#b45309" stroke-width="1.6" marker-end="url(#openArrow)"/>
+<text x="458" y="660" text-anchor="middle" class="rel">0..*</text>
+<line x1="820" y1="158" x2="860" y2="158" stroke="#0f766e" stroke-width="1.6" marker-end="url(#openArrow)"/>
+<line x1="1377" y1="260" x2="1377" y2="315" stroke="#b91c1c" stroke-width="1.6" stroke-dasharray="5,3" marker-end="url(#openArrow)"/>
+<text x="1387" y="292" class="rel">mapea a ApiError</text>
+<path d="M 845 360 L 862 360 L 862 288 L 1200 288 L 1200 365 L 1215 365" fill="none" stroke="#b91c1c" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#openArrow)"/>
+<path d="M 1380 780 L 1380 832 L 845 832" fill="none" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#openArrow)"/>
+<rect x="1035" y="822" width="160" height="16" rx="3" fill="#f8fafc"/>
+<text x="1115" y="834" text-anchor="middle" class="rel">FK product_id (SaleItem)</text>
+<path d="M 890 945 L 236 945 L 236 742" fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="5,3" marker-end="url(#openArrow)"/>
+<rect x="465" y="935" width="210" height="16" rx="3" fill="#f8fafc"/>
+<text x="570" y="947" text-anchor="middle" class="rel">siembra catálogo inicial MySQL</text>
+</svg>

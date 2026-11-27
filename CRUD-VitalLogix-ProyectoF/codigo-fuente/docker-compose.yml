@@ -1,0 +1,44 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: vitallogix-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-vitallogix}
+      MYSQL_USER: ${MYSQL_USER:-vitallogix}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-vitallogix123}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-vitallogix_root_123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - vitallogix_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  vitallogix-app:
+    build: .
+    container_name: vitallogix-app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-vitallogix}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER:-vitallogix}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD:-vitallogix123}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
+      - JWT_SECRET=${JWT_SECRET:-VitalLogix_SuperSecret_JWT_Key_2026_Min32Bytes!}
+      - APP_BOOTSTRAP_ADMIN_USERNAME=${APP_BOOTSTRAP_ADMIN_USERNAME:-admin1}
+      - APP_BOOTSTRAP_ADMIN_PASSWORD=${APP_BOOTSTRAP_ADMIN_PASSWORD:-admin123}
+      - APP_BOOTSTRAP_DEMO_USER_ENABLED=${APP_BOOTSTRAP_DEMO_USER_ENABLED:-true}
+      - APP_BOOTSTRAP_DEMO_USER_USERNAME=${APP_BOOTSTRAP_DEMO_USER_USERNAME:-user1}
+      - APP_BOOTSTRAP_DEMO_USER_PASSWORD=${APP_BOOTSTRAP_DEMO_USER_PASSWORD:-user123}
+
+volumes:
+  vitallogix_mysql_data:

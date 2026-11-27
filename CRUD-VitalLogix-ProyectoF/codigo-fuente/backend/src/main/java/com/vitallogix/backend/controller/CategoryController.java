@@ -1,0 +1,311 @@
+package com.vitallogix.backend.controller;
+
+import com.vitallogix.backend.dto.CategoryRequest;
+import com.vitallogix.backend.dto.CategoryResponse;
+import com.vitallogix.backend.model.Category;
+import com.vitallogix.backend.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Controlador REST para gestión de categorías predefinidas, personalizadas y flujo de aprobación.
+ *
+ * @author Equipo VitalLogix (Dzib Pech, Osorio Muñoz, Solis Chen)
+ * @version 2.0
+ */
+@RestController
+@RequestMapping("/api/categories")
+public class CategoryController {
+
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    // Get all active categories. Used in user-facing product catalog and dropdown lists.
+    /**
+     * Obtiene el valor de {@code activeCategories}.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/active")
+    public ResponseEntity<List<CategoryResponse>> getActiveCategories() {
+        List<Category> categories = categoryService.getActiveCategories();
+        List<CategoryResponse> responses = categories.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
+    // Get predefined system categories.
+    /**
+     * Obtiene el valor de {@code predefinedCategories}.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/predefined")
+    public ResponseEntity<List<CategoryResponse>> getPredefinedCategories() {
+        List<Category> categories = categoryService.getPredefinedCategories();
+        List<CategoryResponse> responses = categories.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
+    // Get custom user-created categories.
+    /**
+     * Obtiene el valor de {@code customCategories}.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/custom")
+    public ResponseEntity<List<CategoryResponse>> getCustomCategories() {
+        List<Category> categories = categoryService.getCustomCategories();
+        List<CategoryResponse> responses = categories.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
+    // Get categories pending approval (admin only). Used in admin approval workflow.
+    /**
+     * Obtiene el valor de {@code pendingApprovals}.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/pending")
+    public ResponseEntity<List<CategoryResponse>> getPendingApprovals() {
+        List<Category> categories = categoryService.getPendingApprovals();
+        List<CategoryResponse> responses = categories.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
+    // Get single category by ID. Returns 404 if not found.
+    /**
+     * Obtiene el valor de {@code categoryById}.
+     * @param id parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id)
+                .map(category -> ResponseEntity.ok(mapToResponse(category)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Get all categories including inactive (admin only).
+    /**
+     * Obtiene el valor de {@code allCategories}.
+     * @return resultado de la operación.
+     */
+    @GetMapping
+    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        List<CategoryResponse> responses = categories.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
+    // Create custom category from product form.
+    // X-User-ID header identifies the creator. Falls back to "ANONYMOUS" if not provided.
+    /**
+     * Registra una nueva entidad mediante {@code createCustomCategory}.
+     * @param request parámetro de entrada de la operación.
+     * @param userId identificador del usuario creador (encabezado HTTP opcional).
+     * @return resultado de la operación.
+     */
+    @PostMapping("/custom")
+    public ResponseEntity<?> createCustomCategory(@RequestBody CategoryRequest request,
+                                                   @RequestHeader(value = "X-User-ID", required = false) String userId) {
+        try {
+            String createdBy = userId != null ? userId : "ANONYMOUS";
+            Category category = categoryService.createCustomCategory(request.name(), createdBy);
+            return ResponseEntity.status(HttpStatus.CREATED).body(mapToResponse(category));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
+        }
+    }
+
+    // Create predefined category (admin only). Used during initial system setup.
+    /**
+     * Registra una nueva entidad mediante {@code createPredefinedCategory}.
+     * @param request parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @PostMapping("/predefined")
+    public ResponseEntity<?> createPredefinedCategory(@RequestBody CategoryRequest request) {
+        try {
+            Category category = categoryService.createPredefinedCategory(request.name(), request.description());
+            return ResponseEntity.status(HttpStatus.CREATED).body(mapToResponse(category));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
+        }
+    }
+
+    // Approve category and activate it (admin only). X-Admin-ID header identifies approver.
+    /**
+     * Actualiza el estado o los atributos de la entidad (approveCategory).
+     * @param id parámetro de entrada de la operación.
+     * @param adminId identificador del administrador que aprueba (encabezado HTTP opcional).
+     * @return resultado de la operación.
+     */
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<?> approveCategory(@PathVariable Long id,
+                                             @RequestHeader(value = "X-Admin-ID", required = false) String adminId) {
+        try {
+            String approvedBy = adminId != null ? adminId : "ADMIN";
+            Category category = categoryService.approveCategory(id, approvedBy);
+            return ResponseEntity.ok(mapToResponse(category));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Reject and delete category (admin only). Used in approval workflow.
+    /**
+     * Elimina o rechaza el registro indicado (rejectCategory).
+     * @param id parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @DeleteMapping("/{id}/reject")
+    public ResponseEntity<?> rejectCategory(@PathVariable Long id) {
+        try {
+            categoryService.rejectCategory(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Update category metadata. Validates name uniqueness.
+    /**
+     * Actualiza el estado o los atributos de la entidad (updateCategory).
+     * @param id parámetro de entrada de la operación.
+     * @param request parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateCategory(@PathVariable Long id, @RequestBody CategoryRequest request) {
+        try {
+            Category category = categoryService.updateCategory(id, request.name(), request.description());
+            return ResponseEntity.ok(mapToResponse(category));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getMessage()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(e.getMessage()));
+        }
+    }
+
+    // Deactivate category (change status to INACTIVE).
+    /**
+     * Actualiza el estado o los atributos de la entidad (deactivateCategory).
+     * @param id parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @PutMapping("/{id}/deactivate")
+    public ResponseEntity<?> deactivateCategory(@PathVariable Long id) {
+        try {
+            Category category = categoryService.deactivateCategory(id);
+            return ResponseEntity.ok(mapToResponse(category));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Activate category (change status to ACTIVE).
+    /**
+     * Actualiza el estado o los atributos de la entidad (activateCategory).
+     * @param id parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @PutMapping("/{id}/activate")
+    public ResponseEntity<?> activateCategory(@PathVariable Long id) {
+        try {
+            Category category = categoryService.activateCategory(id);
+            return ResponseEntity.ok(mapToResponse(category));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Delete category entirely
+    /**
+     * Elimina o rechaza el registro indicado (deleteCategory).
+     * @param id parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseEntity.noContent().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ErrorResponse("No se puede eliminar la categoría porque hay productos asignados a ella."));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Toggle category visibility in product recommendations.
+    // visibleInSuggestions field is required in request body.
+    /**
+     * Establece el valor de {@code suggestionVisibility}.
+     * @param id parámetro de entrada de la operación.
+     * @param request parámetro de entrada de la operación.
+     * @return resultado de la operación.
+     */
+    @PatchMapping("/{id}/suggestion-visibility")
+    public ResponseEntity<?> setSuggestionVisibility(@PathVariable Long id, @RequestBody CategoryRequest request) {
+        if (request.visibleInSuggestions() == null) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("visibleInSuggestions es obligatorio"));
+        }
+        try {
+            Category category = categoryService.setCategorySuggestionVisibility(id, request.visibleInSuggestions());
+            return ResponseEntity.ok(mapToResponse(category));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(e.getMessage()));
+        }
+    }
+
+    // Convert Category entity to response DTO. Includes all audit fields (createdAt, approvedAt) and visibility flags.
+    private CategoryResponse mapToResponse(Category category) {
+        return new CategoryResponse(
+                category.getId(),
+                category.getName(),
+                category.getDescription(),
+                category.getStatus().toString(),
+                category.getType().toString(),
+                category.getCreatedAt(),
+                category.getUpdatedAt(),
+                category.getCreatedBy(),
+                category.getApprovedBy(),
+            category.getApprovedAt(),
+            category.isVisibleInSuggestions()
+        );
+    }
+
+    // Internal error response structure for API error messages.
+    public static class ErrorResponse {
+        private String message;
+
+        public ErrorResponse(String message) {
+            this.message = message;
+        }
+
+        /**
+         * Obtiene el valor de {@code message}.
+         * @return resultado de la operación.
+         */
+        public String getMessage() { return message; }
+        /**
+         * Establece el valor de {@code message}.
+         * @param message parámetro de entrada de la operación.
+         */
+        public void setMessage(String message) { this.message = message; }
+    }
+}

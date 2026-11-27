@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="24" fill="#0f766e"/>
+  <circle cx="90" cy="74" r="38" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="90" y="88" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#ffffff">LD</text>
+  <text x="90" y="148" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">Luis Dzib</text>
+</svg>
